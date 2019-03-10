@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
-class Details extends Component {
+class Delete extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +20,30 @@ class Details extends Component {
       });
   }
 
+  delFood(e,foodId){
+    e.preventDefault()
+    console.log(foodId)
+    fetch(`http://localhost:9999/feed/dogFood/delete/${foodId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    }).then(rawData => rawData.json())
+      .then(responseBody => {
+        if (!responseBody.errors) {
+          // toast.success(responseBody.message, {
+          //   closeButton: false
+          // })
+        }
+        else {
+          // toast.error(responseBody.message, {
+          //   closeButton: false
+          // })
+        }
+        
+      })
+  }
+
 
   render() {
-    //const { dogFood } = this.state
 
     if (this.state.dogFood.length === 0) {
       return (
@@ -48,17 +69,8 @@ class Details extends Component {
           </ul>
           <ul className="butons">
             {
-              this.props.username ?
-                <Link className="btn" type='button' to={`/buy/${food._id}`}>Buy</Link>
-                :
-                null
-            }
-            {
               this.props.isAdmin ?
-                (<div>
-                  <Link className="btn" type='button' to={`/edit/${food._id}`}>Edit</Link>
-                  <Link className="btn" type='button' to={`/delete/${food._id}`}>Delete</Link>
-                </div>)
+                  <Link className="btn" onClick={(e) => this.delFood(e,foodId)} type='button' to='/'>Delete</Link>
                 :
                 null
             }
@@ -69,4 +81,4 @@ class Details extends Component {
 
   }
 }
-export default Details;
+export default Delete;

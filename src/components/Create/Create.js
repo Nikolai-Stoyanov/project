@@ -10,6 +10,7 @@ class Create extends Component {
       imageUrl:null,
       foodType:null,
       dogAge:null,
+      description:null,
       size:null,
       price:null
     }

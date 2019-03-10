@@ -9,6 +9,8 @@ import Login from '../Login/Login';
 import Create from '../Create/Create';
 import Header from '../Header/Header';
 import Details from '../Details/Details';
+import Edit from '../Edit/Edit';
+import Delete from '../Delete/Delete';
 import About from '../About/About';
 import Contact from '../Contact/Contact';
 
@@ -41,8 +43,16 @@ class App extends Component {
         // toast.success(body.message, {
         //   closeButton: false
         // });
+        // console.log(this.state)
       });
   }
+
+  // componentWillReceiveProps (nextProps) {
+  //   if (nextProps.loginSuccess) {
+  //     this.setState({ loggedIn: true })
+  //   }
+  //   console.log(nextProps)
+  // }
 
   handleChange(e) {
     e.preventDefault();
@@ -82,7 +92,7 @@ class App extends Component {
   handleCreateSubmit(e, data) {
     e.preventDefault();
     fetch('http://localhost:9999/feed/dogFood/create', {
-      method: 'post',
+      method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' }
     }).then(rawData => rawData.json())
@@ -114,8 +124,9 @@ class App extends Component {
   }
 
   render() {
-
-    console.log(this.state.dogFoodId)
+    // console.log("Hi")
+    // console.log(this.props)
+    // console.log(this.state)
     return (
       <div className="App">
         {/* <ToastContainer /> */}
@@ -124,16 +135,23 @@ class App extends Component {
 
             <Header isAdmin={this.state.isAdmin} username={this.state.username} logout={this.handleLogout}/>
             <Switch>
-              <Route path='/' render={(props) => <Home {...props} isAdmin={this.state.isAdmin} username={this.state.username} dogFood={this.state.dogFood} />} exact />
-              <Route path='/details/:id' render={(props) => <Details {...props} />}  />
+              <Route path='/' render={(props) => <Home {...props}  isAdmin={this.state.isAdmin} username={this.state.username} dogFood={this.state.dogFood} />} exact />
+              
+              
+              <Route path='/details/:id' render={(props) => <Details {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
+
+              <Route path='/delete/:id' render={(props) => <Delete {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
+             
+              <Route path='/edit/:id' render={(props) => <Edit {...props} isAdmin={this.state.isAdmin} username={this.state.username} />}  />
+
               <Route path='/create' render={
                 (props) => this.state.isAdmin ?
                   <Create {...props} handleCreateSubmit={this.handleCreateSubmit.bind(this)} handleChange={this.handleChange} />
                   :
                   <Redirect to={{ pathname: '/login' }} />
               } />
-              <Route path='/register' render={(props) => <Register {...props} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange} />} />
-              <Route path='/login' render={() => <Login handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange} />} />
+              <Route path='/register' render={(props) => <Register {...props} isLoggedIn={this.state.isLoggedIn} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange} />} />
+              <Route path='/login' render={(props) => <Login {...props} isLoggedIn={this.state.isLoggedIn} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange} />} />
               <Route path='/about' render={() => <About  />} />
               <Route path='/contact' render={() => <Contact  />} />
               <Route render={() => <h1>Not found!</h1>} />

@@ -10,14 +10,14 @@ class Login extends Component {
     this.state={
       username:null,
       password:null,
+      isLoggedIn:false
     }
     this.handleChange=props.handleChange.bind(this);
   }
 
 
   render() {
-
-    if(this.isLoggedIn){
+    if(this.props.isLoggedIn){
       return <Redirect to="/" />;
     }
     return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 //import { ToastContainer, toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.css';
@@ -12,10 +12,8 @@ class Home extends Component {
     this.state = {
       dogFood: [],
       foodId: null,
-      callmatchinfo: false,
     }
     this.onClickHandler = this.onClickHandler.bind(this);
-    this.onClickDetails = this.onClickDetails.bind(this);
   }
 
 
@@ -45,22 +43,8 @@ class Home extends Component {
 
   }
 
-  // onClickDetails(id){
-  //     console.log(id)
-  //     return <Redirect to={`./details/${id}`} />;
-  // }
-
-  onClickDetails(id) {
-    this.setState({
-      callmatchinfo: true,
-      id: id
-    });
-  }
 
   render() {
-    // if (this.callmatchinfo) {
-    //   return <Details dogFood={this.state.id} />
-    // }
     return (
       <div className="Home">
         <h1>All foods</h1>
@@ -68,21 +52,22 @@ class Home extends Component {
           {this.state.dogFood.map(food =>
             (<li key={food._id} className="movie">
               <h2>{food.title}</h2>
-              <img src={food.imageUrl} />
+              <img alt="pic" src={food.imageUrl} />
               <ul className="butons">
-                {/* <span><button name='details'  id={food._id} onClick={this.onClickDetails} >Details</button></span> */}
-                <Link className="btn" to={`/details/${food._id}`}>Details</Link>
+                <Link className="btn" type='button' to={`/details/${food._id}`}>Details</Link>
                 {
                   this.props.username ?
-                    // (<span><button name='buy' id={food._id} onClick={this.onClickHandler}>Buy</button></span>)
-                    <Link className="btn" to={`/buy/${food._id}`}>Buy</Link>
+                    <Link className="btn" type='button' to={`/buy/${food._id}`}>Buy</Link>
                     :
                     null
                 }
                 {
                   this.props.isAdmin ?
-                    // (<span><button name='edit' id={food._id} onClick={this.onClickHandler}>Edit</button></span>)
-                    <Link className="btn" to={`/bedit/${food._id}`}>Edit</Link>
+                    (<div>
+                      <Link className="btn" type='button' to={`/edit/${food._id}`}>Edit</Link>
+                      <Link className="btn" type='button' to={`/delete/${food._id}`}>Delete</Link>
+                    </div>)
+
                     :
                     null
                 }

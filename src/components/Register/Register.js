@@ -13,7 +13,7 @@ class Register extends Component {
     this.handleChange=props.handleChange.bind(this);
   }
   render() {
-    if(localStorage.username){
+    if(this.props.isLoggedIn){
       return <Redirect to="/" />;
     }
     return (
