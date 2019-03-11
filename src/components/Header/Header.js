@@ -16,7 +16,7 @@ class Header extends Component {
                         this.props.username ?
                             (<span>
                                 <Link to='/'>Welcome {this.props.username}!</Link>
-                                <Link to='/'>My Purchased</Link>
+                                <Link to='/order'>My Orders</Link>
                                 {
                                     this.props.isAdmin ?
                                         (<Link to="/create">Create</Link>)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-//import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.css';
 
 import './Home.css'
@@ -38,6 +38,9 @@ class Home extends Component {
       .then(body => {
         this.setState({
           dogFood: body.dogfood
+        });
+        toast.success(body.message, {
+          closeButton: false
         });
       });
 

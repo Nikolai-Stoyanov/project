@@ -42,6 +42,7 @@ module.exports = {
       });
     }
   },
+  
   signIn: (req, res, next) => {
     const { username, password } = req.body;
 
@@ -54,7 +55,7 @@ module.exports = {
         }
 
         if(!user.authenticate(password)) {
-          const error = new Error('A user with this email could not be found');
+          const error = new Error('A user with this username could not be found');
           error.statusCode = 401;
           throw error;
         }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {  toast } from 'react-toastify';
 import './Create.css';
 
 class Create extends Component {
@@ -15,13 +16,35 @@ class Create extends Component {
       price:null
     }
     this.handleChange=props.handleChange.bind(this);
+    this.handleCreateSubmit=this.handleCreateSubmit.bind(this)
+  }
+
+  handleCreateSubmit(e, data) {
+    e.preventDefault();
+    fetch('http://localhost:9999/feed/dogFood/create', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    }).then(rawData => rawData.json())
+      .then(responseBody => {
+        if (!responseBody.errors) {
+          toast.success(responseBody.message, {
+            closeButton: false
+          })
+        }
+        else {
+          toast.error(responseBody.message, {
+            closeButton: false
+          })
+        }
+      })
   }
 
   render() {
     return (
       <div className="Create">
         <h1>Create DogFood</h1>
-        <form onSubmit={(e)=>this.props.handleCreateSubmit(e,this.state)}>
+        <form onSubmit={(e)=>this.handleCreateSubmit(e,this.state)}>
           <label htmlFor="title">Title</label>
           <input type="text" onChange={this.handleChange} name="title" />
           <label htmlFor="brand">Brand</label>

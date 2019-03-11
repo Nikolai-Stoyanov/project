@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import {  toast } from 'react-toastify';
 
 
 class Delete extends Component {
@@ -22,23 +23,23 @@ class Delete extends Component {
 
   delFood(e,foodId){
     e.preventDefault()
-    console.log(foodId)
     fetch(`http://localhost:9999/feed/dogFood/delete/${foodId}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
     }).then(rawData => rawData.json())
       .then(responseBody => {
         if (!responseBody.errors) {
-          // toast.success(responseBody.message, {
-          //   closeButton: false
-          // })
+          toast.success(responseBody.message, {
+            closeButton: false
+          })
         }
         else {
-          // toast.error(responseBody.message, {
-          //   closeButton: false
-          // })
+          toast.error(responseBody.message, {
+            closeButton: false
+          })
+          
         }
-        
+        return <Redirect to="/" />
       })
   }
 
@@ -47,7 +48,6 @@ class Delete extends Component {
 
     if (this.state.dogFood.length === 0) {
       return (
-
         <span>Loading ...</span>
       )
     } else {

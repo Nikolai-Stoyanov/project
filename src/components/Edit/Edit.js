@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import {  toast } from 'react-toastify';
 
 class Edit extends Component {
   constructor(props) {
@@ -58,16 +59,16 @@ class Edit extends Component {
     }).then(rawData => rawData.json())
       .then(responseBody => {
         if (!responseBody.errors) {
-          // toast.success(responseBody.message, {
-          //   closeButton: false
-          // })
+          toast.success(responseBody.message, {
+            closeButton: false
+          })
         }
         else {
           
           
-          // toast.error(responseBody.message, {
-          //   closeButton: false
-          // })
+          toast.error(responseBody.message, {
+            closeButton: false
+          })
         }
         
       })

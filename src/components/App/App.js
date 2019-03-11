@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-//import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 import Home from '../Home/Home';
@@ -11,6 +12,8 @@ import Header from '../Header/Header';
 import Details from '../Details/Details';
 import Edit from '../Edit/Edit';
 import Delete from '../Delete/Delete';
+import Buy from '../Buy/Buy';
+import Order from '../Order/Order.js';
 import About from '../About/About';
 import Contact from '../Contact/Contact';
 
@@ -34,17 +37,6 @@ class App extends Component {
         isAdmin: isAdmin
       })
     }
-    fetch('http://localhost:9999/feed/dogFood')
-      .then(rawData => rawData.json())
-      .then(body => {
-        this.setState({
-          dogFood: body.dogFood
-        });
-        // toast.success(body.message, {
-        //   closeButton: false
-        // });
-        // console.log(this.state)
-      });
   }
 
   // componentWillReceiveProps (nextProps) {
@@ -77,38 +69,19 @@ class App extends Component {
           });
           localStorage.setItem('username', responseBody.username);
           localStorage.setItem('isAdmin', responseBody.isAdmin);
-          // toast.success(`Welcome ${responseBody.username}`, {
-          //   closeButton: false
-          // })
+          toast.success(`Welcome ${responseBody.username}`, {
+            closeButton: false
+          })
         }
         else {
-          // toast.error(responseBody.message, {
-          //   closeButton: false
-          // })
+          toast.error(responseBody.message, {
+            closeButton: false
+          })
         }
       })
   }
 
-  handleCreateSubmit(e, data) {
-    e.preventDefault();
-    fetch('http://localhost:9999/feed/dogFood/create', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
-    }).then(rawData => rawData.json())
-      .then(responseBody => {
-        if (!responseBody.errors) {
-          // toast.success(responseBody.message, {
-          //   closeButton: false
-          // })
-        }
-        else {
-          // toast.error(responseBody.message, {
-          //   closeButton: false
-          // })
-        }
-      })
-  }
+  
 
   handleLogout(event){
     localStorage.removeItem('username');
@@ -118,18 +91,15 @@ class App extends Component {
       username:null,
       isAdmin: false
     });
-    // toast.success("Successfully logout!", {
-    //   closeButton: false
-    // });
+    toast.success("Successfully logout!", {
+      closeButton: false
+    });
   }
 
   render() {
-    // console.log("Hi")
-    // console.log(this.props)
-    // console.log(this.state)
     return (
       <div className="App">
-        {/* <ToastContainer /> */}
+        <ToastContainer />
         <Router>
           <div>
 
@@ -137,6 +107,7 @@ class App extends Component {
             <Switch>
               <Route path='/' render={(props) => <Home {...props}  isAdmin={this.state.isAdmin} username={this.state.username} dogFood={this.state.dogFood} />} exact />
               
+              <Route path='/order' render={(props) => <Order {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
               
               <Route path='/details/:id' render={(props) => <Details {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
 
@@ -144,9 +115,11 @@ class App extends Component {
              
               <Route path='/edit/:id' render={(props) => <Edit {...props} isAdmin={this.state.isAdmin} username={this.state.username} />}  />
 
+              <Route path='/buy/:id' render={(props) => <Buy {...props} handleChange={this.handleChange} isAdmin={this.state.isAdmin} username={this.state.username} />} exact />
+
               <Route path='/create' render={
                 (props) => this.state.isAdmin ?
-                  <Create {...props} handleCreateSubmit={this.handleCreateSubmit.bind(this)} handleChange={this.handleChange} />
+                  <Create {...props}  handleChange={this.handleChange} />
                   :
                   <Redirect to={{ pathname: '/login' }} />
               } />
