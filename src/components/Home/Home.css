@@ -45,6 +45,11 @@
   width: 30%;
 }
 
+.homePic {
+  margin: 0 auto;
+  width: 10%;
+}
+
 button{  
   width: 30%;
   margin:0 auto;

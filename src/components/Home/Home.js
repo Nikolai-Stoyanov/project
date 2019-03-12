@@ -50,6 +50,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
+        <img alt="pic" className="homePic" src={"https://www.naturalinstinct.com/media/wysiwyg/natural_instinct/blog/20170623-HEADER-Obesity.png"} />
         <h1>All foods</h1>
         <ul className="movies">
           {this.state.dogFood.map(food =>

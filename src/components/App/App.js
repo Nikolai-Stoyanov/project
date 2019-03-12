@@ -9,6 +9,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Create from '../Create/Create';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import Details from '../Details/Details';
 import Edit from '../Edit/Edit';
 import Delete from '../Delete/Delete';
@@ -21,6 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: null,
       username: null,
       isAdmin: false,
       isLoggedIn:false,
@@ -34,17 +36,11 @@ class App extends Component {
       this.setState({
         isLoggedIn:true,
         username: localStorage.getItem('username'),
+        userId:localStorage.getItem('userId'),
         isAdmin: isAdmin
       })
     }
   }
-
-  // componentWillReceiveProps (nextProps) {
-  //   if (nextProps.loginSuccess) {
-  //     this.setState({ loggedIn: true })
-  //   }
-  //   console.log(nextProps)
-  // }
 
   handleChange(e) {
     e.preventDefault();
@@ -65,8 +61,10 @@ class App extends Component {
           this.setState({
             isLoggedIn:true,
             username: responseBody.username,
+            userId:responseBody.userId,
             isAdmin: responseBody.isAdmin
           });
+          localStorage.setItem('userId', responseBody.userId);
           localStorage.setItem('username', responseBody.username);
           localStorage.setItem('isAdmin', responseBody.isAdmin);
           toast.success(`Welcome ${responseBody.username}`, {
@@ -83,7 +81,7 @@ class App extends Component {
 
   
 
-  handleLogout(event){
+  handleLogout(){
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('isAdmin');
@@ -102,21 +100,14 @@ class App extends Component {
         <ToastContainer />
         <Router>
           <div>
-
             <Header isAdmin={this.state.isAdmin} username={this.state.username} logout={this.handleLogout}/>
             <Switch>
               <Route path='/' render={(props) => <Home {...props}  isAdmin={this.state.isAdmin} username={this.state.username} dogFood={this.state.dogFood} />} exact />
-              
-              <Route path='/order' render={(props) => <Order {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
-              
+              <Route path='/order' render={(props) => <Order {...props} isAdmin={this.state.isAdmin} username={this.state.username} userId={this.state.userId}  />}  />
               <Route path='/details/:id' render={(props) => <Details {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
-
               <Route path='/delete/:id' render={(props) => <Delete {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
-             
               <Route path='/edit/:id' render={(props) => <Edit {...props} isAdmin={this.state.isAdmin} username={this.state.username} />}  />
-
-              <Route path='/buy/:id' render={(props) => <Buy {...props} handleChange={this.handleChange} isAdmin={this.state.isAdmin} username={this.state.username} />} exact />
-
+              <Route path='/buy/:id' render={(props) => <Buy {...props} handleChange={this.handleChange} isAdmin={this.state.isAdmin} username={this.state.username} userId={this.state.userId} />} exact />
               <Route path='/create' render={
                 (props) => this.state.isAdmin ?
                   <Create {...props}  handleChange={this.handleChange} />
@@ -129,6 +120,7 @@ class App extends Component {
               <Route path='/contact' render={() => <Contact  />} />
               <Route render={() => <h1>Not found!</h1>} />
             </Switch>
+            <Footer/>
           </div>
 
         </Router>

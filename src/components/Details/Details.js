@@ -38,7 +38,7 @@ class Details extends Component {
             <h1>{food.brand}</h1>
             <h2>Details of {food.title}</h2>
             <img alt="pic" src={food.imageUrl} />
-            <p>{food.description}</p>
+            <p>Description: {food.description}</p>
           </span>
           <ul className="details">
             <li>Food Type: {food.foodType}</li>

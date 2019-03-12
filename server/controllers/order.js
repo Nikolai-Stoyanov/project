@@ -16,7 +16,7 @@ module.exports = {
       });
   },
 
-  createOrder: (req, res) => {
+  createOrder: (req, res,next) => {
     const orderObj = req.body;
     Order.create(orderObj)
       .then((order) => {
