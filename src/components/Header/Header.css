@@ -1,13 +1,13 @@
-.App header {
+.header {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: rgb(17, 233, 17);
     padding: 0 50px;
     
  }
  
- .App header a {
+ .header a {
    float: left;
-   color: black;
+   color: rgb(255, 255, 255);
    text-align: center;
    padding: 18px;
    text-decoration: none;
@@ -15,23 +15,12 @@
    line-height: 25px;
    font-weight: bold;
    
-   /*border-radius: 4px;*/
  }
  
- .App header a.logo {
-   font-size: 15px;
-   font-weight: bold;
+ .header a:hover {
+   background-color: rgba(12, 204, 38, 0.5);
+   color: black;
  }
- 
- .App header a:hover {
-   background-color: dodgerblue;
-   color: white;
- }
- 
- .App header .header-right {
-   float: right;
- }
- 
  
  
  @media screen and (max-width: 500px) {
@@ -45,3 +34,4 @@
      float: none;
    }
  }
+

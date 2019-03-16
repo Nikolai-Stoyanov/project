@@ -1,0 +1,79 @@
+.Buy {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+
+.first-section{
+    display: inline-block;
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.second-section{
+    text-align: right;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.second-section h1 {
+    text-align: left;
+    margin-bottom: 50px;
+  }
+
+.second-section ul {
+    margin: 0 auto;
+    padding: 10px 10px 10px 10px;
+  }
+  
+.second-section li {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.second-section span {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.Buy img {
+  margin: 0 auto;
+  width: 70%;
+}
+
+.butons{
+  display: inline;
+  text-decoration: none;
+  text-align: center;
+  padding: 0;
+}
+  
+.btn{
+    display: inline-block;
+    width: 20%;
+    margin:5px 5px 5px 5px;
+    text-align: center;  
+    font-size: 14px;
+    background-color: rgba(12, 204, 38);
+    color: white;
+    border-radius: 7px;
+    text-decoration: none;
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5); 
+    padding: 10px 10px;
+ }
+
+.btn:hover{
+    color:  rgba(12, 204, 38);
+    background: transparent;
+}
+
+.Buy input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  

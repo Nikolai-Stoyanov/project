@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import {  toast } from 'react-toastify';
+import './Delete.css'
 
 
 class Delete extends Component {
@@ -54,19 +55,23 @@ class Delete extends Component {
       const foodId = this.props.match.params.id;
       const food = this.state.dogFood.find(f => f._id === foodId)
       return (
-        <div className="Home">
-          <span>
-            <h1>{food.brand}</h1>
-            <h2>Details of {food.title}</h2>
-            <img alt="pic" src={food.imageUrl} />
-            <p>{food.description}</p>
-          </span>
-          <ul className="details">
-            <li>Food Type: {food.foodType}</li>
-            <li>Life Stage: {food.dogAge}</li>
-            <li>Size: {food.size} kg</li>
-            <li>Price: {food.price} lv</li>
-          </ul>
+        <div className="Delete">
+          <h2>Delete {food.title}</h2>
+          <div>
+            <section className='first-section'>
+              <img alt="pic" src={food.imageUrl} />
+            </section>
+            <section className='second-section'>
+              <h1>Brand: {food.brand}</h1>
+              <ul >
+                <li><span>Description:</span> {food.description}</li>
+                <li><span>Food Type:</span> {food.foodType}</li>
+                <li><span>Life Stage:</span> {food.dogAge}</li>
+                <li><span>Size:</span> {food.size} kg</li>
+                <li><span>Price:</span> {food.price} lv</li>
+              </ul>
+            </section>
+          </div>
           <ul className="butons">
             {
               this.props.isAdmin ?

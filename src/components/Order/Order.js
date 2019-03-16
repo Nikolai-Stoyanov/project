@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Order.css'
 
 
 class Order extends Component {
@@ -28,7 +29,7 @@ class Order extends Component {
     } else {
       const userId = this.props.userId;
       return (
-        <div className="Home">
+        <div className="Order">
           <h1>Orders of {this.props.username}</h1>
           <table>
             <thead>
@@ -45,8 +46,8 @@ class Order extends Component {
               order.creator === userId ?
                 (<tbody>
                   <tr>
-                    <td>{order.date}</td>
-                    <td>{order.product} </td>
+                    <td className='dat'>{order.date}</td>
+                    <td className='prod'>{order.product} </td>
                     <td>{order.price} lv</td>
                     <td>{order.quantity}</td>
                     <td>{order.finalPrice} lv</td>

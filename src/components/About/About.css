@@ -1,0 +1,14 @@
+.About {
+    text-align: center;
+}
+
+.p-text{
+  background-color:  rgba(17, 233, 17,0.4);
+  margin: 50px 50px 50px 50px;
+  padding: 20px 20px 20px 20px;
+  text-align: left;
+}
+
+span{
+  font-weight: bold;
+}

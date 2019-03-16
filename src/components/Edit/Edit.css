@@ -1,0 +1,35 @@
+.Edit{
+    margin-bottom: 30px;
+    text-align: center; 
+  }
+  
+  .Edit form {
+    display: grid;
+    width: 25%;
+    margin: 0 auto;
+  }
+  
+  .Edit input, textarea {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .Edit input[type="submit"]{  
+    display: inline-block;
+    width: 50%;
+    margin:0 auto;
+    text-align: center;  
+    font-size: 14px;
+    background-color: rgba(12, 204, 38);
+    color: white;
+    border-radius: 7px;
+    text-decoration: none;
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5); 
+    padding: 10px 10px;
+  }
+  
+  .Edit input[type="submit"]:hover{
+    color:  rgba(12, 204, 38);
+    background: transparent;
+  }

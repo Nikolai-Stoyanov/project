@@ -1,70 +1,82 @@
+.home-first {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url("https://www.naturalinstinct.com/media/wysiwyg/natural_instinct/blog/20170623-HEADER-Obesity.png") no-repeat center;
+  background-size: cover;
+}
+
+.home-first h2 {
+  padding: 300px 0px 200px 0px;
+  margin: 0px 0px 0px 0px;
+  text-align: center;
+  font-size: 50px;
+  width: 100%;
+  color: white;
+}
+
+.Home h1 {
+  background: rgba(17, 233, 17);
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+}
+
 .Home {
   text-align: center;
+  margin: 0;
+  margin-bottom: 30px
 }
 
-.Home ul.movies {
+/* .all-products {
+  display: flex;
+  margin: 0;
+  
+} */
+
+.products li {
   display: inline-block;
+  text-align: center;
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+  width: 30%;
+}
+
+/* .product {
+  display: inline-block;
+} */
+
+.product section {
+  text-align: center;
+  display: grid;
+}
+
+.Home img {
   margin: 0 auto;
-  width: 50%;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  height: 300px;
+  width: 200px;
 }
 
-.Home li.movie {
-  display: grid	;
-
-}
-
-.butons{
+.butons {
   display: inline-block;
   text-decoration: none;
   text-align: center;
   padding: 0;
 }
 
-.btn{
+.btn {
   display: inline-block;
-  width: 5%;
-  margin:0;
-  border: 2px solid dodgerblue;
-  text-align: center;  
+  width: 25%;
+  margin: 5px 5px 5px 5px;
+  text-align: center;
   font-size: 14px;
-  background: dodgerblue;
+  background-color: rgba(12, 204, 38);
   color: white;
-  margin-top: 20px;
-  margin-left: 5px;
   border-radius: 7px;
   text-decoration: none;
-  box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5); 
-  padding: 10px 20px;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  padding: 10px 10px;
 }
 
-
-.Home img {
-  margin: 0 auto;
-  width: 30%;
-}
-
-.homePic {
-  margin: 0 auto;
-  width: 10%;
-}
-
-button{  
-  width: 30%;
-  margin:0 auto;
-  border: 2px solid dodgerblue;
-  text-align: center;  
-  font-size: 14px;
-  background: dodgerblue;
-  color: white;
-  border-radius: 7px;
-  margin-top: 20px; 
-  box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5); 
-  padding: 10px 20px;
-}
-
-button:hover{
-  color: dodgerblue;
+.btn:hover {
+  color: rgba(12, 204, 38);
   background: transparent;
 }
+

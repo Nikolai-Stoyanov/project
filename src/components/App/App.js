@@ -25,18 +25,18 @@ class App extends Component {
       userId: null,
       username: null,
       isAdmin: false,
-      isLoggedIn:false,
-      dogFood:[]
+      isLoggedIn: false,
+      dogFood: []
     }
   }
 
   componentWillMount() {
-    const isAdmin = localStorage.getItem('isAdmin')==='true'
+    const isAdmin = localStorage.getItem('isAdmin') === 'true'
     if (localStorage.getItem('username')) {
       this.setState({
-        isLoggedIn:true,
+        isLoggedIn: true,
         username: localStorage.getItem('username'),
-        userId:localStorage.getItem('userId'),
+        userId: localStorage.getItem('userId'),
         isAdmin: isAdmin
       })
     }
@@ -59,9 +59,9 @@ class App extends Component {
       .then(responseBody => {
         if (responseBody.username) {
           this.setState({
-            isLoggedIn:true,
+            isLoggedIn: true,
             username: responseBody.username,
-            userId:responseBody.userId,
+            userId: responseBody.userId,
             isAdmin: responseBody.isAdmin
           });
           localStorage.setItem('userId', responseBody.userId);
@@ -79,14 +79,14 @@ class App extends Component {
       })
   }
 
-  
 
-  handleLogout(){
+
+  handleLogout() {
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('isAdmin');
     this.setState({
-      username:null,
+      username: null,
       isAdmin: false
     });
     toast.success("Successfully logout!", {
@@ -100,27 +100,53 @@ class App extends Component {
         <ToastContainer />
         <Router>
           <div>
-            <Header isAdmin={this.state.isAdmin} username={this.state.username} logout={this.handleLogout}/>
+            <Header isAdmin={this.state.isAdmin} username={this.state.username} logout={this.handleLogout} />
             <Switch>
-              <Route path='/' render={(props) => <Home {...props}  isAdmin={this.state.isAdmin} username={this.state.username} dogFood={this.state.dogFood} />} exact />
-              <Route path='/order' render={(props) => <Order {...props} isAdmin={this.state.isAdmin} username={this.state.username} userId={this.state.userId}  />}  />
-              <Route path='/details/:id' render={(props) => <Details {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
-              <Route path='/delete/:id' render={(props) => <Delete {...props} isAdmin={this.state.isAdmin} username={this.state.username}  />}  />
-              <Route path='/edit/:id' render={(props) => <Edit {...props} isAdmin={this.state.isAdmin} username={this.state.username} />}  />
-              <Route path='/buy/:id' render={(props) => <Buy {...props} handleChange={this.handleChange} isAdmin={this.state.isAdmin} username={this.state.username} userId={this.state.userId} />} exact />
-              <Route path='/create' render={
+              <Route path='/' render={(props) => <Home {...props} isAdmin={this.state.isAdmin} username={this.state.username} dogFood={this.state.dogFood} />} exact />
+              <Route path='/details/:id' render={(props) => <Details {...props} isAdmin={this.state.isAdmin} username={this.state.username} />} />
+              
+              <Route path='/order' render={
+                (props) => this.state.username ? 
+                <Order {...props} isAdmin={this.state.isAdmin} username={this.state.username} userId={this.state.userId} />
+              :
+              <Redirect to={{ pathname: '/login' }} />
+              } />
+
+              <Route path='/delete/:id' render={
                 (props) => this.state.isAdmin ?
-                  <Create {...props}  handleChange={this.handleChange} />
+                 <Delete {...props} isAdmin={this.state.isAdmin} username={this.state.username} />
+                :
+                <Redirect to={{ pathname: '/login' }} />
+                } />
+              
+              <Route path='/edit/:id' render={
+                (props) => this.state.isAdmin ?
+                  <Edit {...props} isAdmin={this.state.isAdmin} username={this.state.username} />
                   :
                   <Redirect to={{ pathname: '/login' }} />
               } />
+
+              <Route path='/buy/:id' render={
+                (props) => this.state.username ?
+                  <Buy {...props} handleChange={this.handleChange} isAdmin={this.state.isAdmin} username={this.state.username} userId={this.state.userId} />
+                  :
+                  <Redirect to={{ pathname: '/login' }} />
+              } exact />
+
+              <Route path='/create' render={
+                (props) => this.state.isAdmin ?
+                  <Create {...props} handleChange={this.handleChange} />
+                  :
+                  <Redirect to={{ pathname: '/login' }} />
+              } />
+
               <Route path='/register' render={(props) => <Register {...props} isLoggedIn={this.state.isLoggedIn} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange} />} />
               <Route path='/login' render={(props) => <Login {...props} isLoggedIn={this.state.isLoggedIn} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange} />} />
-              <Route path='/about' render={() => <About  />} />
-              <Route path='/contact' render={() => <Contact  />} />
+              <Route path='/about' render={() => <About />} />
+              <Route path='/contact' render={() => <Contact />} />
               <Route render={() => <h1>Not found!</h1>} />
             </Switch>
-            <Footer/>
+            <Footer />
           </div>
 
         </Router>

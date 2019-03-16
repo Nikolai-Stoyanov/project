@@ -17,7 +17,6 @@ class Register extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="Register">
         <div className="Register">
           <h1>Register</h1>
           <form onSubmit={(e)=> this.props.handleSubmit(e,this.state,'signup')}>
@@ -30,7 +29,6 @@ class Register extends Component {
             <input type="submit" value="REGISTER" />
           </form>
         </div>
-      </div>
     );
   }
 }

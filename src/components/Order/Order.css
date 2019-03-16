@@ -1,0 +1,30 @@
+.Order {
+    text-align: center;
+}
+
+td {
+    border: 1px solid black;
+    height: 30px;
+    width: 5%;
+}
+
+th {
+    border: 1px solid black;
+    background-color: #dddddd;
+}
+
+table {
+    border: 1px solid black;
+}
+
+.prod {
+    text-align: left;
+    height: 30px;
+    width: 60%;
+}
+
+.dat {
+    text-align: left;
+    height: 30px;
+    width: 15%;
+}

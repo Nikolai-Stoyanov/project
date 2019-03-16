@@ -1,3 +1,8 @@
+.Login{
+  text-align: center;  
+}
+
+
 .Login form {
   display: grid;
   width: 25%;
@@ -6,23 +11,25 @@
 
 .Login input {
   padding: 10px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
 .Login input[type="submit"]{  
-  width: 25%;
+  display: inline-block;
+  width: 50%;
   margin:0 auto;
-  border: 2px solid dodgerblue;
   text-align: center;  
   font-size: 14px;
-  background: dodgerblue;
+  background-color: rgba(12, 204, 38);
   color: white;
   border-radius: 7px;
-  margin-top: 20px; 
+  text-decoration: none;
   box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5); 
+  padding: 10px 10px;
 }
 
 .Login input[type="submit"]:hover{
-  color: dodgerblue;
+  color:  rgba(12, 204, 38);
   background: transparent;
 }

@@ -3,8 +3,12 @@
     width: 100%;
     bottom: 0;
     text-align: center;
-    background-color: #f1f1f1;
+    background-color: rgb(17, 233, 17,0.4);
     padding: 5px 0;
     font-size: 15px;
     font-weight: bold;
 }
+
+.footer:hover{
+    background-color:  rgba(17, 233, 17);
+  }

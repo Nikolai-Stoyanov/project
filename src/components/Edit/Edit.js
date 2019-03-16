@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import {  toast } from 'react-toastify';
+import './Edit.css';
 
 class Edit extends Component {
   constructor(props) {
@@ -96,7 +97,7 @@ class Edit extends Component {
             price: this.state.price
       }
       return (
-        <div className="Create">
+        <div className="Edit  ">
           <h1>Edit DogFood</h1>
           <form onSubmit={(e) => this.onSubmit(e,data,this.state.foodId)}>
             <label htmlFor="title">Title</label>

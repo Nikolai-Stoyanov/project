@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import './Buy.css'
 
 
 class Buy extends Component {
@@ -8,7 +9,7 @@ class Buy extends Component {
         super(props);
         this.state = {
             dogFood: [],
-            quantity:''
+            quantity: ''
         }
         this.handleChange = props.handleChange.bind(this);
     }
@@ -53,41 +54,47 @@ class Buy extends Component {
         } else {
             const foodId = this.props.match.params.id;
             const food = this.state.dogFood.find(f => f._id === foodId)
-            const quantities=this.state.quantity;
+            const quantities = this.state.quantity;
             const orderObj = {
                 creator: this.props.userId,
                 date: Date.now,
                 product: food.title,
                 quantity: quantities,
-                price:food.price,
-                finalPrice: food.price*quantities,
+                price: food.price,
+                finalPrice: food.price * quantities,
             }
             return (
-                <div className="Home">
-                    <span>
-                        <h1>{food.brand}</h1>
-                        <h2>Buy of {food.title}</h2>
-                        <img alt="pic" src={food.imageUrl} />
-                        <p>Description: {food.description}</p>
-                    </span>
-                    <ul className="details">
-                        <li>Food Type: {food.foodType}</li>
-                        <li>Life Stage: {food.dogAge}</li>
-                        <li>Size: {food.size} kg</li>
-                        <li>Price: {food.price} lv</li>
-                    </ul>
-                    <ul >
-                        {
-                            this.props.username
-                                ?
-                                (<div>
-                                    <input onChange={this.handleChange} type="number" name="quantity" id="quantity" step="1" />
-                                    <Link className="btn" onClick={(e) => this.createOrder(e, orderObj)} type='button' to='/'>Add to Order</Link>
-                                </div>)
-                                :
-                                null
-                        }
-                    </ul>
+                <div className="Buy">
+                    <h2>To buy {food.title}</h2>
+                    <div className='section'>
+                        <section className='first-section'>
+                            <img alt="pic" src={food.imageUrl} />
+                        </section>
+                        <section className='second-section'>
+                            <h1>Brand: {food.brand}</h1>
+                            <ul >
+                                <li><span>Description:</span> {food.description}</li>
+                                <li><span>Food Type:</span> {food.foodType}</li>
+                                <li><span>Life Stage:</span> {food.dogAge}</li>
+                                <li><span>Size:</span> {food.size} kg</li>
+                                <li><span>Price:</span> {food.price} lv</li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div>
+                        <ul >
+                            {
+                                this.props.username
+                                    ?
+                                    (<div>
+                                        <input onChange={this.handleChange} type="number" name="quantity" id="quantity" step="1" />
+                                        <Link className="btn" onClick={(e) => this.createOrder(e, orderObj)} type='button' to='/'>Add to Order</Link>
+                                    </div>)
+                                    :
+                                    null
+                            }
+                        </ul>
+                    </div>
                 </div>
             );
         }
