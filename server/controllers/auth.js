@@ -55,7 +55,7 @@ module.exports = {
         }
 
         if(!user.authenticate(password)) {
-          const error = new Error('A user with this username could not be found');
+          const error = new Error('A user with this password could not be found');
           error.statusCode = 401;
           throw error;
         }

@@ -12,3 +12,7 @@
 span{
   font-weight: bold;
 }
+
+.p-text:hover{
+  background-color:  rgba(17, 233, 17);
+}

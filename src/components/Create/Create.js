@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import './Create.css';
 
 class Create extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      title:null,
-      brand:null,
-      imageUrl:null,
-      foodType:null,
-      dogAge:null,
-      description:null,
-      size:null,
-      price:null
+    this.state = {
+      title: null,
+      brand: null,
+      imageUrl: null,
+      foodType: null,
+      dogAge: null,
+      description: null,
+      size: null,
+      price: null
     }
-    this.handleChange=props.handleChange.bind(this);
-    this.handleCreateSubmit=this.handleCreateSubmit.bind(this)
+    this.handleChange = props.handleChange.bind(this);
+    this.handleCreateSubmit = this.handleCreateSubmit.bind(this)
   }
 
   handleCreateSubmit(e, data) {
@@ -44,7 +44,7 @@ class Create extends Component {
     return (
       <div className="Create">
         <h1>Create DogFood</h1>
-        <form onSubmit={(e)=>this.handleCreateSubmit(e,this.state)}>
+        <form onSubmit={(e) => this.handleCreateSubmit(e, this.state)}>
           <label htmlFor="title">Title</label>
           <input type="text" onChange={this.handleChange} name="title" />
           <label htmlFor="brand">Brand</label>
@@ -52,9 +52,20 @@ class Create extends Component {
           <label htmlFor="imageUrl">Picture</label>
           <input type="text" onChange={this.handleChange} name="imageUrl" />
           <label htmlFor="foodType">Food Type</label>
-          <input type="text" onChange={this.handleChange} name="foodType" />
+          <select type="text" onChange={this.handleChange} name="foodType" defaultValue=''>
+          <option selected value=""></option>
+            <option value="Canned Food">Canned Food</option>
+            <option value="Dry Food">Dry Food</option>
+            <option value="Veterinary Diets">Veterinary Diets</option>
+            <option value="Treats">Treats</option>
+          </select>
           <label htmlFor="dogAge">Life Stage</label>
-          <input type="text" onChange={this.handleChange} name="dogAge" />
+          <select type="text" onChange={this.handleChange} name="dogAge" defaultValue=''>
+          <option selected value=""></option>
+            <option value="Adult">Adult</option>
+            <option value="Puppy">Puppy</option>
+            <option value="Senior">Senior</option>
+          </select>
           <label htmlFor="description">Description</label>
           <textarea onChange={this.handleChange} name="description" />
           <label htmlFor="size">Size</label>

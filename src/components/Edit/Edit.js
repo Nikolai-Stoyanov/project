@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+// import { handler } from 'react';
 import './Edit.css';
+// import { PassThrough } from 'stream';
 
 class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      foodId:this.props.match.params.id,
+      // option:["Canned Food","Dry Food"],
+      foodId: this.props.match.params.id,
       dogFood: [],
       title: "",
       brand: "",
@@ -19,6 +22,7 @@ class Edit extends Component {
       price: ""
     }
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -51,7 +55,7 @@ class Edit extends Component {
     })
   }
 
-  onSubmit(e, data,id) {
+  onSubmit(e, data, id) {
     e.preventDefault()
     fetch(`http://localhost:9999/feed/dogFood/edit/${id}`, {
       method: 'post',
@@ -65,41 +69,37 @@ class Edit extends Component {
           })
         }
         else {
-          
-          
           toast.error(responseBody.message, {
             closeButton: false
           })
         }
-        
+
       })
-      console.log('aide de')
-      return <Redirect to="/" />;
+    return <Redirect to="/" />;
   }
 
   render() {
-
     if (this.state.dogFood.length === 0) {
       return (
 
         <span>Loading ...</span>
       )
     } else {
-
-      const data={
+      const data = {
         title: this.state.title,
-            brand: this.state.brand,
-            imageUrl: this.state.imageUrl,
-            foodType: this.state.foodType,
-            dogAge: this.state.dogAge,
-            description: this.state.description,
-            size: this.state.size,
-            price: this.state.price
+        brand: this.state.brand,
+        imageUrl: this.state.imageUrl,
+        foodType: this.state.foodType,
+        dogAge: this.state.dogAge,
+        description: this.state.description,
+        size: this.state.size,
+        price: this.state.price
       }
+
       return (
         <div className="Edit  ">
-          <h1>Edit DogFood</h1>
-          <form onSubmit={(e) => this.onSubmit(e,data,this.state.foodId)}>
+          <h1>Edit {this.state.title}</h1>
+          <form onSubmit={(e) => this.onSubmit(e, data, this.state.foodId)}>
             <label htmlFor="title">Title</label>
             <input type="text" onChange={this.onChange} name="title" value={this.state.title} />
             <label htmlFor="brand">Brand</label>
@@ -107,9 +107,20 @@ class Edit extends Component {
             <label htmlFor="imageUrl">Picture</label>
             <input type="text" onChange={this.onChange} name="imageUrl" value={this.state.imageUrl} />
             <label htmlFor="foodType">Food Type</label>
-            <input type="text" onChange={this.onChange} name="foodType" value={this.state.foodType} />
+            <select name="foodType" onClick={this.handleChange} value={this.state.value}>
+              <option selected value='' >{this.state.foodType}</option>
+              <option value="Canned Food" onClick={this.handleChange}>Canned Food</option>
+              <option value="Dry Food" onClick={this.handleChange}>Dry Food</option>
+              <option value="Veterinary Diets" onClick={this.handleChange}>Veterinary Diets</option>
+              <option value="Treats" onClick={this.handleChange}>Treats</option>
+            </select>
             <label htmlFor="dogAge">Life Stage</label>
-            <input type="text" onChange={this.onChange} name="dogAge" value={this.state.dogAge} />
+            <select onChange={this.handleChange} name="dogAge" value={this.state.value} >
+              <option selected value={this.state.dogAge}>{this.state.dogAge}</option>
+              <option value="Adult" >Adult</option>
+              <option value="Puppy" >Puppy</option>
+              <option value="Senior">Senior</option>
+            </select>
             <label htmlFor="description">Description</label>
             <textarea onChange={this.onChange} name="description" value={this.state.description} />
             <label htmlFor="size">Size</label>

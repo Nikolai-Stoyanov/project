@@ -4,7 +4,7 @@ const authController = require('../controllers/auth');
 const User = require('../models/User');
 
 
-router.post('/signup', 
+router.post('/signup',
   [
     // TODO: Add normalize email and check
     body('email')
@@ -27,7 +27,7 @@ router.post('/signup',
       .isEmpty()
       .withMessage('Please enter a valid username.')
   ]
-, authController.signUp);
+  , authController.signUp);
 router.post('/signin', authController.signIn);
 
 module.exports = router;

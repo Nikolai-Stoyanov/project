@@ -43,6 +43,7 @@ class App extends Component {
   }
 
   handleChange(e) {
+    console.log(e)
     e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value
@@ -85,13 +86,17 @@ class App extends Component {
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('isAdmin');
-    this.setState({
-      username: null,
-      isAdmin: false
-    });
     toast.success("Successfully logout!", {
       closeButton: false
     });
+    this.setState({
+      userId: null,
+      username: null,
+      isAdmin: false,
+      isLoggedIn: false,
+    });
+
+    
   }
 
   render() {
